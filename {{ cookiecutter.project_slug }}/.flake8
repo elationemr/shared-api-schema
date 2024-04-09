@@ -1,7 +1,0 @@
-[flake8]
-exclude = 
-    .venv,
-    .git,
-    .github,
-    terraform
-max-line-length = 100
