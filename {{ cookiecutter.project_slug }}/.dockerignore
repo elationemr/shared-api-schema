@@ -1,0 +1,18 @@
+.dockerignore
+.git
+.github
+.vscode
+.coverage
+.venv
+coverage.xml
+htmlcov
+terraform
+helm
+
+README.md
+CODEOWNERS
+
+# Python
+__pycache__
+.mypy_cache
+.pytest_cache

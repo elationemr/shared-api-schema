@@ -1,0 +1,23 @@
+name: Verify JIRA ticket
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+      - synchronize
+    branches:
+      - main
+      - develop
+{%- raw %}
+jobs:
+  jira_ticket_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify JIRA ticket
+        uses: elationemr/github-actions/compliance/verify-jira-ticket@main
+        with:
+          text: |
+            ${{ github.event.pull_request.title }}
+            ${{ github.event.pull_request.body }}
+{%- endraw %}

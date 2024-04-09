@@ -1,0 +1,46 @@
+# This is a template for individual Terraform files generated for each
+# pull request. The GitHub Actions workflow creates a file for based on this template
+# for each open pull request.
+#
+module "{tf_resource}" {
+  source       = "git::git@github.com:elationemr/terraform-modules.git//argocd_application/service?ref=argocd_application_service_v1"
+  branch_name  = "{branch_name}"
+  service_name = local.service_name
+  environment  = "dev"
+  cluster_name = local.cluster_name
+  name_suffix  = "{name_suffix}"
+  labels = merge(local.common_labels, {
+    "tags.datadoghq.com/env"     = local.workspace_environment
+    "tags.datadoghq.com/service" = "${local.service_name}-{name_suffix}"
+    "tags.datadoghq.com/version" = "{git_sha}"
+  })
+  container_image_repository = split(":", var.container_image)[0]
+  container_image_tag        = local.image_tag
+  pod_disruption_budget = {
+    enabled = false
+  }
+  # Service
+  default_replica_count    = local.default_replica_count
+  deployment_strategy      = local.deployment_strategy
+  service_account_role_arn = data.terraform_remote_state.dev[0].outputs.service_role_arn
+  environment_variables    = local.environment_variables
+  secrets                  = local.secrets
+  dapr                     = local.dapr
+  resources_requests       = local.resources_requests
+  resources_limits         = local.resources_limits
+  keda                     = local.keda
+
+  # Helm
+  helm_chart_revision = local.helm_chart_revision
+
+  # Ingress
+  ingress_traffic_type               = local.ingress_traffic_type
+  ingress_rules                      = local.ingress_rules
+  ingress_frontend_gateway_endpoints = local.ingress_frontend_gateway_endpoints
+
+  # Deployed tests
+  after_deploy_job = merge(local.after_deploy_job_config, {
+    container_image_repository = split(":", var.container_image)[0]
+    container_image_tag        = join("-", [split(":", var.container_image)[1], "tests"])
+  })
+}

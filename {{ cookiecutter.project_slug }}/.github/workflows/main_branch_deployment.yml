@@ -1,0 +1,213 @@
+name: Main Branch Deployment
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+env:
+  SHARED_ACTIONS_REF: v1
+  SERVICE_NAME: {{ cookiecutter.project_slug }}
+
+  # A comma separated list of environments to deploy to.
+  # Example:
+  #   DEPLOY_TO_ENVIRONMENTS: dev,demo,stage,sandbox,production
+  DEPLOY_TO_ENVIRONMENTS: dev
+{%- raw %}
+jobs:
+  environments:
+    runs-on: ubuntu-latest
+    outputs:
+      environments: ${{ steps.environments.outputs.environments }}
+    steps:
+      - name: Determine enabled environments
+        id: environments
+        run: |
+          environments_json=$(echo $DEPLOY_TO_ENVIRONMENTS | sed 's/ //g' | jq -cR 'split(",") | map(select(. | length > 0))')
+          echo "environments=$environments_json" >> $GITHUB_OUTPUT
+          echo "Enabled environments:"
+          echo $environments_json | jq
+  build_test_push:
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.build_test_push.outputs.image }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: code
+      - name: Checkout shared actions
+        uses: actions/checkout@v4
+        with:
+          repository: elationemr/services-shared
+          ref: ${{ env.SHARED_ACTIONS_REF }}
+          token: ${{ secrets.AUTOMATION_USER_PAT }}
+          path: ./.github/shared
+      - name: Build, test, and push
+        id: build_test_push
+        uses: ./.github/shared/github/service/actions/build_and_push
+        with:
+          service_name: ${{ env.SERVICE_NAME }}
+          docker_path: code
+          image_tags: ${{ github.ref_name }},${{ github.sha }}
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+  deploy-to-dev:
+    name: Deploy to dev
+    needs:
+      - environments
+      - build_test_push
+    if: |
+      always()
+      && needs.build_test_push.result == 'success'
+      && contains(fromJSON(needs.environments.outputs.environments), 'dev')
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: Checkout shared actions
+        uses: actions/checkout@v4
+        with:
+          repository: elationemr/services-shared
+          ref: ${{ env.SHARED_ACTIONS_REF }}
+          token: ${{ secrets.AUTOMATION_USER_PAT }}
+          path: ./.github/shared
+      - name: Deploy
+        uses: ./.github/shared/github/service/actions/deploy
+        with:
+          environment: dev
+          service_name: ${{ env.SERVICE_NAME }}
+          image: ${{ needs.build_test_push.outputs.image }}
+          branch: main
+          terraform_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_modules_ssh_key: ${{ secrets.TF_MODULES_SSH_KEY }}
+
+  deploy-to-stage:
+    name: Deploy to stage
+    needs:
+      - environments
+      - build_test_push
+      - deploy-to-dev
+    if: |
+      always()
+      && needs.build_test_push.result == 'success'
+      && contains(fromJSON(needs.environments.outputs.environments), 'stage')
+      && (needs.deploy-to-dev.result == 'success' || needs.deploy-to-dev.result == 'skipped')
+    runs-on: ubuntu-latest
+    environment: stage
+    steps:
+      - name: Checkout shared actions
+        uses: actions/checkout@v4
+        with:
+          repository: elationemr/services-shared
+          ref: ${{ env.SHARED_ACTIONS_REF }}
+          token: ${{ secrets.AUTOMATION_USER_PAT }}
+          path: ./.github/shared
+      - name: Deploy
+        uses: ./.github/shared/github/service/actions/deploy
+        with:
+          environment: stage
+          service_name: ${{ env.SERVICE_NAME }}
+          image: ${{ needs.build_test_push.outputs.image }}
+          branch: main
+          terraform_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_modules_ssh_key: ${{ secrets.TF_MODULES_SSH_KEY }}
+
+  deploy-to-demo:
+    name: Deploy to demo
+    needs:
+      - environments
+      - build_test_push
+      - deploy-to-dev
+      - deploy-to-stage
+    if: |
+      always()
+      && needs.build_test_push.result == 'success'
+      && contains(fromJSON(needs.environments.outputs.environments), 'demo')
+      && (needs.deploy-to-dev.result == 'success' || needs.deploy-to-dev.result == 'skipped')
+      && (needs.deploy-to-stage.result == 'success' || needs.deploy-to-stage.result == 'skipped')
+    runs-on: ubuntu-latest
+    environment: demo
+    steps:
+      - name: Checkout shared actions
+        uses: actions/checkout@v4
+        with:
+          repository: elationemr/services-shared
+          ref: ${{ env.SHARED_ACTIONS_REF }}
+          token: ${{ secrets.AUTOMATION_USER_PAT }}
+          path: ./.github/shared
+      - name: Deploy
+        uses: ./.github/shared/github/service/actions/deploy
+        with:
+          environment: demo
+          service_name: ${{ env.SERVICE_NAME }}
+          image: ${{ needs.build_test_push.outputs.image }}
+          branch: main
+          terraform_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_modules_ssh_key: ${{ secrets.TF_MODULES_SSH_KEY }}
+
+
+  deploy-to-sandbox:
+    name: Deploy to sandbox
+    needs:
+      - environments
+      - build_test_push
+      - deploy-to-dev
+      - deploy-to-stage
+    if: |
+      always()
+      && needs.build_test_push.result == 'success'
+      && contains(fromJSON(needs.environments.outputs.environments), 'sandbox')
+      && (needs.deploy-to-dev.result == 'success' || needs.deploy-to-dev.result == 'skipped')
+      && (needs.deploy-to-stage.result == 'success' || needs.deploy-to-stage.result == 'skipped')
+    runs-on: ubuntu-latest
+    environment: sandbox
+    steps:
+      - name: Checkout shared actions
+        uses: actions/checkout@v4
+        with:
+          repository: elationemr/services-shared
+          ref: ${{ env.SHARED_ACTIONS_REF }}
+          token: ${{ secrets.AUTOMATION_USER_PAT }}
+          path: ./.github/shared
+      - name: Deploy
+        uses: ./.github/shared/github/service/actions/deploy
+        with:
+          environment: sandbox
+          service_name: ${{ env.SERVICE_NAME }}
+          image: ${{ needs.build_test_push.outputs.image }}
+          branch: main
+          terraform_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_modules_ssh_key: ${{ secrets.TF_MODULES_SSH_KEY }}
+
+  deploy-to-production:
+    name: Deploy to production
+    needs:
+      - environments
+      - build_test_push
+      - deploy-to-dev
+      - deploy-to-stage
+    if: |
+      always()
+      && needs.build_test_push.result == 'success'
+      && contains(fromJSON(needs.environments.outputs.environments), 'production')
+      && (needs.deploy-to-dev.result == 'success' || needs.deploy-to-dev.result == 'skipped')
+      && (needs.deploy-to-stage.result == 'success' || needs.deploy-to-stage.result == 'skipped')
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout shared actions
+        uses: actions/checkout@v4
+        with:
+          repository: elationemr/services-shared
+          ref: ${{ env.SHARED_ACTIONS_REF }}
+          token: ${{ secrets.AUTOMATION_USER_PAT }}
+          path: ./.github/shared
+      - name: Deploy
+        uses: ./.github/shared/github/service/actions/deploy
+        with:
+          environment: production
+          service_name: ${{ env.SERVICE_NAME }}
+          image: ${{ needs.build_test_push.outputs.image }}
+          branch: main
+          terraform_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_modules_ssh_key: ${{ secrets.TF_MODULES_SSH_KEY }}
+{%- endraw %}

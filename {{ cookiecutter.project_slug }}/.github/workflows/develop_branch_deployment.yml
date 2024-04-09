@@ -1,0 +1,59 @@
+name: Develop Branch Deployment
+on:
+  push:
+    branches:
+      - develop
+env:
+  SHARED_ACTIONS_REF: v1
+  SERVICE_NAME: {{ cookiecutter.project_slug }}
+{%- raw %}
+jobs:
+  build_test_push:
+    runs-on: ubuntu-latest
+    outputs:
+      image: ${{ steps.build_test_push.outputs.image }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: code
+      - name: Checkout shared actions
+        uses: actions/checkout@v4
+        with:
+          repository: elationemr/services-shared
+          ref: ${{ env.SHARED_ACTIONS_REF }}
+          token: ${{ secrets.AUTOMATION_USER_PAT }}
+          path: ./.github/shared
+      - name: Build, test, and push
+        id: build_test_push
+        uses: ./.github/shared/github/service/actions/build_and_push
+        with:
+          service_name: ${{ env.SERVICE_NAME }}
+          docker_path: code
+          image_tags: ${{ github.ref_name }},${{ github.sha }}
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+  deploy-to-dev:
+    name: Deploy to dev
+    needs:
+      - build_test_push
+    runs-on: ubuntu-latest
+    environment: dev
+    steps:
+      - name: Checkout shared actions
+        uses: actions/checkout@v4
+        with:
+          repository: elationemr/services-shared
+          ref: ${{ env.SHARED_ACTIONS_REF }}
+          token: ${{ secrets.AUTOMATION_USER_PAT }}
+          path: ./.github/shared
+      - name: Deploy
+        uses: ./.github/shared/github/service/actions/deploy
+        with:
+          environment: dev
+          service_name: ${{ env.SERVICE_NAME }}
+          image: ${{ needs.build_test_push.outputs.image }}
+          branch: develop
+          terraform_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_modules_ssh_key: ${{ secrets.TF_MODULES_SSH_KEY }}
+{%- endraw %}

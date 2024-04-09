@@ -1,0 +1,14 @@
+{
+  "project_name": "Your Service Here",
+  "project_description": "What will you create?",
+  "project_slug": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
+  "team_name": "Your team here",
+  "github_team_slug": "your_github_team_slug_here",
+  "terraform_version": "1.1.7",
+  "cluster_dns_dev": "el8-dev-services.internal",
+  "cluster_dns_production": "el8-production-services.internal",
+  "cluster_dns_sandbox": "el8-sandbox-services.internal",
+  "cluster_dns_stage": "el8-dev-services.internal",
+  "use_service_account": false,
+  "ingress_traffic_type": "none"
+}

@@ -1,0 +1,37 @@
+name: Pull Request Workflow
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+  push:
+    branches:
+      - main
+      - develop
+env:
+  SHARED_ACTIONS_REF: v1
+  SERVICE_NAME: {{ cookiecutter.project_slug }}
+{%- raw %}
+jobs:
+  pull_request:
+    name: Pull Request Workflow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout shared actions
+        uses: actions/checkout@v4
+        with:
+          repository: elationemr/services-shared
+          ref: ${{ env.SHARED_ACTIONS_REF }}
+          token: ${{ secrets.AUTOMATION_USER_PAT }}
+          path: ./.github/shared
+      - name: Pull Request Workflow
+        uses: ./.github/shared/github/service/actions/pull_request
+        with:
+          service_name: ${{ env.SERVICE_NAME }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          terraform_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_modules_ssh_key: ${{ secrets.TF_MODULES_SSH_KEY }}
+{%- endraw %}
