@@ -1,6 +1,6 @@
 $schema: "https://json-schema.org/draft/2020-12/schema"
-$id: "https://raw.githubusercontent.com/elationemr/shared-api-schema/main/pagination/drf-pagination.yaml"
-title: DrfPaginationResult
+$id: “urn:elation:schemas:pagination:pagination-result”
+title: PaginationResult
 type: object
 properties:
   results:
