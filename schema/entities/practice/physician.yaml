@@ -1,0 +1,155 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:elation:schemas:practice:physician"
+title: "Physician"
+type: object
+properties:
+  id:
+    type: integer
+    description: "Unique identifier for the physician."
+  firstName:
+    type: string
+    description: "The physician's first name."
+  middleName:
+    type: string
+    description: "The physician's middle name."
+  lastName:
+    type: string
+    description: "The physician's last name."
+  dob:
+    type: string
+    format: date-time
+    nullable: true
+    description: "The physician's date of birth in YYYY-MM-DD format."
+  sex:
+    type: string
+    description: "The physician's sex."
+  suffix:
+    type: string
+    description: "Suffix for the physician's name (e.g., Jr., Sr., III)."
+  email:
+    type: string
+    nullable: true
+    description: "The physician's email address."
+  phone:
+    type: string
+    description: "The physician's primary phone number."
+  address:
+    type: string
+    description: "The physician's primary address."
+  suite:
+    type: string
+    description: "Suite number of the physician's address."
+  city:
+    type: string
+    description: "City of the physician's address."
+  state:
+    type: string
+    description: "State of the physician's address."
+  zip:
+    type: string
+    description: "ZIP code of the physician's address."
+  address_line:
+    type: string
+    description: "Full address line of the physician's address."
+  city_state_zip:
+    type: string
+    description: "Concatenated string of city, state, and ZIP code."
+  user_id:
+    type: integer
+    nullable: true
+    description: "User identifier if the physician is also a user in the system."
+  full_address:
+    type: string
+    description: "Full address of the physician including suite, city, state, and ZIP code."
+  fax:
+    type: string
+    description: "The physician's fax number."
+  specialties:
+    type: array
+    items:
+      type: string
+    description: "List of specialties of the physician."
+  full_name:
+    type: string
+    description: "The physician's full name."
+  reverse_name:
+    type: string
+    description: "The physician's name in reverse order (e.g., Last, First)."
+  cms_npi:
+    type: string
+    nullable: true
+    description: "National Provider Identifier (NPI) assigned by CMS."
+  canonical_id:
+    type: integer
+    description: "Canonical identifier for the physician."
+  credentials:
+    type: string
+    credentials: 
+    description: "The physician's credentials (e.g., MD, DO)."
+  access_user_id:
+    type: integer
+    description: "Identifier for the user accessing the physician's data."
+  access_practice_fax:
+    type: string
+    description: "Fax number of the practice the physician is associated with."
+  access_practice_id:
+    type: integer
+    description: "Identifier for the practice the physician is associated with."
+  access_practice_plr:
+    type: boolean
+    description: "Indicates if the practice has practice level role."
+  access_practice_practicing_emr:
+    type: boolean
+    description: "Indicates if the practice is using an electronic medical record system."
+  access_enterprise_id:
+    type: integer
+    description: "Identifier for the enterprise the physician is associated with."
+  contact_type:
+    type: string
+    description: "Type of contact (e.g., physician, medical_group)."
+    enum:
+      - "physician"
+      - "medical_group"
+  mapping_state:
+    type: string
+    nullable: true
+    description: "State of the mapping for the physician's data."
+    enum:
+      - "mapped"
+      - "scratch"
+  cell_phone:
+    type: string
+    description: "The physician's cell phone number."
+  back_office_phone:
+    type: string
+    description: "The back office phone number of the physician."
+  accepting_insurance:
+    type: boolean
+    nullable: true
+    description: "Indicates if the physician is accepting insurance."
+  accepting_new_patients:
+    type: boolean
+    nullable: true
+    description: "Indicates if the physician is accepting new patients."
+  insurance_accepted:
+    type: string
+    nullable: true
+    description: "Details of the insurance accepted by the physician."
+  direct_address:
+    type: string
+    nullable: true
+    description: "Direct address of the physician."
+  notes:
+    type: string
+    description: "Additional notes about the physician."
+  e_confirmed:
+    type: boolean
+    description: "Indicates if the physician's information has been electronically confirmed."
+  service_levels:
+    type: array
+    items:
+      type: string
+    description: "List of service levels provided by the physician."
+  dr_name:
+    type: string
+    description: "The physician's last name with the title 'Dr.'"
