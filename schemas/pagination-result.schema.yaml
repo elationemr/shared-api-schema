@@ -33,7 +33,9 @@ properties:
 required:
   - results
   - current_page_num
+  - next_page_url
   - page_first_item_num
   - page_last_item_num
+  - previous_page_url
   - total_item_count
   - total_page_count
