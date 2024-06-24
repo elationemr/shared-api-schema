@@ -1,5 +1,5 @@
 $schema: "https://json-schema.org/draft/2020-12/schema"
-$id: “urn:elation:schemas:pagination:pagination-result”
+$id: “urn:elation:schemas:pagination-result”
 title: PaginationResult
 type: object
 properties:
@@ -8,7 +8,6 @@ properties:
   current_page_num:
     description: The current page number based on the given limit and offset.
     type: integer
-    nullable: true
   next_page_url:
     description: The URL of the next page (normally the current URL with the offset incremented by the limit), if such page exists.  Otherwise null.
     type: string
@@ -17,11 +16,9 @@ properties:
   page_first_item_num:
     description: Used by the front end to display “Showing you pets 21-40 of 400”.
     type: integer
-    nullable: true
   page_last_item_num:
     description: Used by the front end to display “Showing you pets 21-40 of 400”.
     type: integer
-    nullable: true
   previous_page_url:
     description: The URL of the previous page, if such page exists.  Otherwise null.
     type: string
@@ -30,17 +27,13 @@ properties:
   total_item_count:
     description: Used by the front end to display “Showing you pets 21-40 of 400”.
     type: integer
-    nullable: true
   total_page_count:
     description: The total number of pages based on the given limit and offset.
     type: integer
-    nullable: true
 required:
   - results
   - current_page_num
-  - next_page_url
   - page_first_item_num
   - page_last_item_num
-  - previous_page_url
   - total_item_count
   - total_page_count
