@@ -4,9 +4,7 @@ title: PaginationResult
 type: object
 properties:
   results:
-    type:
-      - object
-      - array
+    type: array
   current_page_num:
     description: The current page number based on the given limit and offset.
     type: integer
