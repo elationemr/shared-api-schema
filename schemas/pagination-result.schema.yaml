@@ -3,6 +3,11 @@ $id: “urn:elation:schemas:pagination-result”
 title: PaginationResult
 type: object
 properties:
+  # Functionally, PaginatedResult should be a generic PaginatedResult<T> where results is of 
+  # type T[]. But json-schema doesn't support this out of the box, and getting tools to 
+  # understand that is even harder. It's expected that any usage of this schema will be 
+  # via extension (using the allOf keyword), and overriding the results property. 
+  # true effectively acts as an any, which extenders can further constrain while keeping validation correct.
   results: true
   current_page_num:
     description: The current page number based on the given limit and offset.
