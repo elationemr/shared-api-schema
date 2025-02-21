@@ -1,0 +1,25 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:elation:schemas:patient-sexual-orientation"
+title: "PatientSexualOrientation"
+type: integer
+description: >
+  Codes for patient sexual orientation:
+    - 1: Unknown
+    - 2: Straight
+    - 3: Gay
+    - 4: Bisexual
+    - 5: Option not listed
+    - 6: Prefer not to say
+    - 7: Lesbian
+    - 8: Queer
+    - 9: Asexual
+enum:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9

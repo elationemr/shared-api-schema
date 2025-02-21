@@ -1,0 +1,25 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:elation:schemas:patient-gender-identity-display"
+title: "PatientGenderIdentityDisplay"
+type: string
+description: >
+  Display-friendly labels for patient gender identity:
+    - Unknown: 1
+    - Man: 2
+    - Woman: 3
+    - Transgender man / trans masculine: 4
+    - Transgender woman / trans feminine: 5
+    - Non-binary / genderqueer / gender fluid: 6
+    - Option not listed: 7
+    - Prefer not to say: 8
+    - Two spirit: 9
+enum:
+  - "Unknown"
+  - "Man"
+  - "Woman"
+  - "Transgender man / trans masculine"
+  - "Transgender woman / trans feminine"
+  - "Non-binary / genderqueer / gender fluid"
+  - "Option not listed"
+  - "Prefer not to say"
+  - "Two spirit"

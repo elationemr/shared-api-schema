@@ -1,0 +1,25 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:elation:schemas:patient-sexual-orientation-display"
+title: "PatientSexualOrientationDisplay"
+type: string
+description: >
+  Display-friendly labels for patient sexual orientation:
+    - Unknown: 1
+    - Straight: 2
+    - Gay: 3
+    - Bisexual: 4
+    - Option not listed: 5
+    - Prefer not to say: 6
+    - Lesbian: 7
+    - Queer: 8
+    - Asexual: 9
+enum:
+  - "Unknown"
+  - "Straight"
+  - "Gay"
+  - "Bisexual"
+  - "Option not listed"
+  - "Prefer not to say"
+  - "Lesbian"
+  - "Queer"
+  - "Asexual"
