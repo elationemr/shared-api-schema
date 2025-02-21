@@ -1,0 +1,4 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: “urn:elation:schemas:patient-pronouns-display
+title: PatientPronounsDisplay
+enum: ["She/Her/Hers", "He/Him/His", "They/Them/Theirs", "Option not listed"]
