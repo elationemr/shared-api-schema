@@ -1,0 +1,4 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: “urn:elation:schemas:patient-legal-gender-marker
+title: PatientLegalGenderMarker
+enum: ["M", "F", "N", "O"]
