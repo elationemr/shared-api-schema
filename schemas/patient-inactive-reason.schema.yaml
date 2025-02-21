@@ -1,0 +1,5 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: “urn:elation:schemas:patient-inactive-reason
+title: PatientInactiveReason
+type: string
+enum: ["left_good_terms", "left_bad_terms", "practice_ended", "other", "unknown"]
