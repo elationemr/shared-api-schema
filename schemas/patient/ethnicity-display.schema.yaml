@@ -1,0 +1,15 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:elation:schemas:patient-ethnicity-display"
+title: "PatientEthnicityDisplay"
+type: string
+description: >
+  Ethnicity options:
+    - No ethnicity specified
+    - Hispanic or Latino
+    - Not Hispanic or Latino
+    - Declined to specify
+enum:
+  - "No ethnicity specified"
+  - "Hispanic or Latino"
+  - "Not Hispanic or Latino"
+  - "Declined to specify"
