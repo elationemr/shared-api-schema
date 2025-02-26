@@ -1,0 +1,8 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:elation:schemas:staff-type"
+title: StaffType
+description: A list of supported user types for practice staff
+type: string
+enum:
+  - Physician
+  - OfficeStaff
