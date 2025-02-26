@@ -2,4 +2,8 @@ $schema: "https://json-schema.org/draft/2020-12/schema"
 $id: “urn:elation:schemas:patient-pronouns
 title: PatientPronouns
 type: string
-enum: ["she_her_hers", "he_him_his", "they_them_theirs", "not_listed"]
+enum:
+  - "she_her_hers" 
+  - "he_him_his"
+  - "they_them_theirs"
+  - "not_listed"

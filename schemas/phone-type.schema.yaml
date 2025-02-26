@@ -2,4 +2,11 @@ $schema: "https://json-schema.org/draft/2020-12/schema"
 $id: “urn:elation:schemas:elation-phone-type
 title: ElationPhoneType
 type: string
-enum: ["Cell Phone", "Home", "Main", "Work", "Night", "Fax", "Other"]
+enum: 
+  - "Cell Phone"
+  - "Home"
+  - "Main" 
+  - "Work" 
+  - "Night" 
+  - "Fax"
+  - "Other"
