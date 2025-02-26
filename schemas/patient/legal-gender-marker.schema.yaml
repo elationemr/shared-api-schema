@@ -1,7 +1,9 @@
 $schema: "https://json-schema.org/draft/2020-12/schema"
-$id: “urn:elation:schemas:patient-legal-gender-marker
+$id: "urn:elation:schemas:patient-legal-gender-marker"
 title: PatientLegalGenderMarker
 type: string
+description: >
+  Source: https://github.com/elationemr/hippo/blob/develop/elation/patients/models.py#L8498
 enum:
   - "M" 
   - "F" 

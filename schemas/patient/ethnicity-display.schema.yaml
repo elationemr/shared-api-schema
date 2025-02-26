@@ -8,6 +8,8 @@ description: >
     - Hispanic or Latino
     - Not Hispanic or Latino
     - Declined to specify
+  
+  Source: https://github.com/elationemr/hippo/blob/develop/elation/patients/models.py#L239
 enum:
   - "No ethnicity specified"
   - "Hispanic or Latino"

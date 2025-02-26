@@ -13,6 +13,8 @@ description: >
     - Option not listed: 7
     - Prefer not to say: 8
     - Two spirit: 9
+
+  Source: https://github.com/elationemr/hippo/blob/develop/elation/patients/models.py#L612
 enum:
   - "Unknown"
   - "Man"

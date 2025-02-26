@@ -1,14 +1,14 @@
 $schema: "https://json-schema.org/draft/2020-12/schema"
-$id: “urn:elation:schemas:patient-inactive-reason
-title: PatientInactiveReason
+$id: "urn:elation:schemas:patient-inactive-reason-display"
+title: PatientInactiveReasonDisplay
 type: string
 description: >
   Reasons a patient is no longer a patient for a given practice
   
   Source: https://github.com/elationemr/hippo/blob/develop/elation/patients/models.py#L8323
 enum:
-  - "left_good_terms"
-  - "left_bad_terms"
-  - "practice_ended" 
-  - "other" 
-  - "unknown"
+  - "Patient Left on Good Terms"
+  - "Patient Left on Bad Terms"
+  - "Practice Ended Relationship" 
+  - "Other" 
+  - "Unknown"

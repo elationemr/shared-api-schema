@@ -13,6 +13,8 @@ description: >
     - Lesbian: 7
     - Queer: 8
     - Asexual: 9
+  
+    Source: https://github.com/elationemr/hippo/blob/develop/elation/patients/models.py#L560
 enum:
   - "Unknown"
   - "Straight"

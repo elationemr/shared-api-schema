@@ -2,6 +2,8 @@ $schema: "https://json-schema.org/draft/2020-12/schema"
 $id: “urn:elation:schemas:patient-sex
 title: PatientSex
 type: string
+description: >
+  Source: https://github.com/elationemr/hippo/blob/develop/elation/entities/models.py#L756
 enum:
   - "M" 
   - "F" 

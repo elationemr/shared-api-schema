@@ -2,6 +2,8 @@ $schema: "https://json-schema.org/draft/2020-12/schema"
 $id: “urn:elation:schemas:elation-phone-type
 title: ElationPhoneType
 type: string
+description: >
+  Source: https://github.com/elationemr/hippo/blob/develop/elation/patients/models.py#L3751
 enum: 
   - "Cell Phone"
   - "Home"
