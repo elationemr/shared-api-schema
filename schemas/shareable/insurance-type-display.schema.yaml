@@ -1,0 +1,16 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: “urn:elation:schemas:elation-insurance-type-display
+title: ElationInsuranceTypeDisplay
+type: string
+description: >
+  Source: https://github.com/elationemr/hippo/blob/develop/elation/shareable/models.py#L2357
+enum: 
+  - "Commercial"
+  - "Medicare"
+  - "Medicare Supplement" 
+  - "Medicare Advantage" 
+  - "Medicaid" 
+  - "Managed Medicaid"
+  - "Self Pay"
+  - "Capitated"
+  - "Workers Compensation/Third Party Liability"
