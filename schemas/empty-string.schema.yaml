@@ -1,0 +1,7 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: “urn:elation:schemas:empty-string
+title: EmptyString
+type: string
+description: An unset value represented by an empty string. In V1 hippo API's, null or undefined values are often represented as an empty string.
+enum:
+  - ""

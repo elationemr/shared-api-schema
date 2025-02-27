@@ -1,0 +1,14 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: “urn:elation:schemas:patient-race
+title: PatientRace
+type: integer
+description: >
+  Source: https://github.com/elationemr/hippo/blob/develop/elation/patients/models.py#L219
+enum: 
+  - 1 # No race specified
+  - 2 # American Indian or Alaska Native
+  - 3 # Asian
+  - 4 # Black or African American
+  - 5 # Native Hawaiian or Other Pacific Islander
+  - 6 # White
+  - 7 # Declined to specify
