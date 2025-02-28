@@ -1,0 +1,11 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: “urn:elation:schemas:patient-status
+title: PatientStatus
+type: string
+description: >
+  Source: https://github.com/elationemr/hippo/blob/develop/elation/patients/models.py#L8317
+enum:
+  - "active"
+  - "inactive" 
+  - "prospect" 
+  - "deceased"

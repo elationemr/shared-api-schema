@@ -1,0 +1,17 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:elation:schemas:patient-contact-method-display"
+title: "PatientContactMethodDisplay"
+type: string
+description: >
+  Display-friendly labels for contact methods:
+    - SMS (Text)
+    - E-mail
+    - Phone
+    - Patient Passport
+  
+  Source: https://github.com/elationemr/hippo/blob/develop/elation/patients/models.py#L212
+enum:
+  - "SMS (Text)"
+  - "E-mail"
+  - "Phone"
+  - "Patient Passport"
