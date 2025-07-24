@@ -1,0 +1,26 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:elation:schemas:patient-next-of-kin-relationship"
+title: PatientNextOfKinRelationship
+type: string
+description: >
+  Sources: (There are several partial sources for this enum, this schema combines them all)
+    - https://github.com/elationemr/hippo/blob/4ac103de1579276f4cc7a16e87d27d7bf0499b6f/elation/patients/hl7_message_services/nk1_service.py#L46
+    - https://github.com/elationemr/hippo/blob/4ac103de1579276f4cc7a16e87d27d7bf0499b6f/static/js/react/apps/emr/src/components/selects/NOKRelationshipSelect3Formik.tsx#L14
+    - https://github.com/elationemr/hippo/blob/4ac103de1579276f4cc7a16e87d27d7bf0499b6f/elation/api/services_ironbridge.py#L288
+    - https://github.com/elationemr/hippo/blob/4ac103de1579276f4cc7a16e87d27d7bf0499b6f/betle/betle/features/fixtures/patient.py#L175
+enum:
+  - "BRO"
+  - "CGV"
+  - "FCH"
+  - "FTH"
+  - "GRD"
+  - "GRP"
+  - "MTH"
+  - "OTH"
+  - "PAR"
+  - "SCH"
+  - "SIB"
+  - "SIS"
+  - "SPO"
+  - "CHD"
+  # - "FRD" (I'm unable to find any reference to an abbreviation for Friend in Hippo)

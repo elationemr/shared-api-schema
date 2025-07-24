@@ -1,0 +1,16 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:elation:schemas:patient-insurance-payment-program-code"
+title: PatientInsurancePaymentProgramCode
+type: string
+description: >
+  Machine-readable insurance program codes.
+
+  Source: https://github.com/elationemr/hippo/blob/4ac103de1579276f4cc7a16e87d27d7bf0499b6f/elation/patients/models.py#L3991
+enum:
+  - medicare_part_b
+  - medicare_advantage
+  - medicaid
+  - commercial_hmsa
+  - commercial_sfhp
+  - commercial_other
+  - workers_compensation

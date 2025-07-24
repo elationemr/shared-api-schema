@@ -1,0 +1,16 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:elation:schemas:patient-insurance-payment-program-display"
+title: PatientInsurancePaymentProgramDisplay
+type: string
+description: >
+  Human-readable insurance program display names.
+
+  Source: https://github.com/elationemr/hippo/blob/4ac103de1579276f4cc7a16e87d27d7bf0499b6f/elation/patients/models.py#L3991
+enum:
+  - Medicare Part B
+  - Medicare Advantage
+  - Medicaid
+  - Commercial - HMSA
+  - Commercial - SFHP
+  - Commercial - Other
+  - Worker's Compensation

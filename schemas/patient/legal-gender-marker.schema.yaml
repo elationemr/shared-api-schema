@@ -3,9 +3,9 @@ $id: "urn:elation:schemas:patient-legal-gender-marker"
 title: PatientLegalGenderMarker
 type: string
 description: >
-  Source: https://github.com/elationemr/hippo/blob/develop/elation/patients/models.py#L8498
+  Source: https://github.com/elationemr/hippo/blob/4ac103de1579276f4cc7a16e87d27d7bf0499b6f/elation/patients/models.py#L8545
 enum:
   - "M" 
   - "F" 
   - "N" 
-  - "O"
+  - "U"
