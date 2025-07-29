@@ -1,0 +1,11 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "urn:elation:schemas:sex"
+title: Sex
+type: string
+description: >
+  Source: https://github.com/elationemr/hippo/blob/4ac103de1579276f4cc7a16e87d27d7bf0499b6f/elation/entities/models.py#L762
+enum:
+  - "M" 
+  - "F" 
+  - "N" 
+  - "O"
