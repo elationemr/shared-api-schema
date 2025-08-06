@@ -1,5 +1,5 @@
 $schema: "https://json-schema.org/draft/2020-12/schema"
-$id: “urn:elation:schemas:pagination-result”
+$id: "urn:elation:schemas:pagination-result"
 title: PaginationResult
 type: object
 properties:
@@ -18,10 +18,10 @@ properties:
     nullable: true
     format: uri
   page_first_item_num:
-    description: Used by the front end to display “Showing you pets 21-40 of 400”.
+    description: Used by the front end to display "Showing you pets 21-40 of 400".
     type: integer
   page_last_item_num:
-    description: Used by the front end to display “Showing you pets 21-40 of 400”.
+    description: Used by the front end to display "Showing you pets 21-40 of 400".
     type: integer
   previous_page_url:
     description: The URL of the previous page, if such page exists.  Otherwise null.
@@ -29,7 +29,7 @@ properties:
     nullable: true
     format: uri
   total_item_count:
-    description: Used by the front end to display “Showing you pets 21-40 of 400”.
+    description: Used by the front end to display "Showing you pets 21-40 of 400".
     type: integer
   total_page_count:
     description: The total number of pages based on the given limit and offset.
